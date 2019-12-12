@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ItemsContext } from "../contexts/ItemsContext";
+import ItemDetails from "./ItemDetails";
 
 const ShoppingList = () => {
 	const { items } = useContext(ItemsContext);
@@ -8,7 +9,11 @@ const ShoppingList = () => {
 	return (
 		<div>
 			<h1>Items listed here</h1>
-			{items.length}
+			<ul>
+				{items.map(item => {
+					return <ItemDetails item={item} key={Date.now} />;
+				})}
+			</ul>
 		</div>
 	);
 };
