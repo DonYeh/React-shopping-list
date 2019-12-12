@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { ItemsContext } from "../contexts/ItemsContext";
 
 const ItemDetails = ({ item }) => {
+	console.log(item);
+
 	return (
 		<li>
 			<div>{item.name}</div>

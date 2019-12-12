@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ItemsContext } from "../contexts/ItemsContext";
 import ItemDetails from "./ItemDetails";
+import uuid from "uuid/v1";
 
 const ShoppingList = () => {
 	const { items } = useContext(ItemsContext);
@@ -11,7 +12,7 @@ const ShoppingList = () => {
 			<h1>Items listed here</h1>
 			<ul>
 				{items.map(item => {
-					return <ItemDetails item={item} key={Date.now} />;
+					return <ItemDetails item={item} key={uuid()} />;
 				})}
 			</ul>
 		</div>
