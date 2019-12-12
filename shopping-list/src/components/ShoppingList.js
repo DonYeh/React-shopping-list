@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ItemsContext } from "../contexts/ItemsContext";
 
-export default function ShoppingList() {
+const ShoppingList = () => {
+	const { items } = useContext(ItemsContext);
+	console.log(items);
+
 	return (
 		<div>
-			<u1> shopping list here </u1>
+			<h1>Items listed here</h1>
+			{items.length}
 		</div>
 	);
-}
+};
+
+export default ShoppingList;

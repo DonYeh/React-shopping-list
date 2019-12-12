@@ -4,12 +4,16 @@ import ShoppingList from "./components/ShoppingList";
 import Navbar from "./components/Navbar";
 import AddItem from "./components/AddItem";
 
+import ItemsContextProvider from "./contexts/ItemsContext";
+
 function App() {
 	return (
 		<div className="App">
-			<Navbar />
-			<ShoppingList />
-			<AddItem />
+			<ItemsContextProvider>
+				<Navbar />
+				<ShoppingList />
+				<AddItem />
+			</ItemsContextProvider>
 		</div>
 	);
 }
