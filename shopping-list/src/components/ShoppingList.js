@@ -12,7 +12,7 @@ const ShoppingList = () => {
 			<h1>Items listed here</h1>
 			<ul>
 				{items.map(item => {
-					return <ItemDetails item={item} key={uuid()} />;
+					return <ItemDetails item={item} key={item.id} />;
 				})}
 			</ul>
 		</div>
