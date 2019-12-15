@@ -1,64 +1,87 @@
 import React, { useContext, useReducer, useState } from "react";
-import { ItemsContext, addItem } from "../contexts/ItemsContext";
+import { ItemsContext, initialState } from "../contexts/ItemsContext";
 import ItemsReducer from "../reducer/ItemsReducer";
-import { initialState } from "../reducer/ItemsReducer";
+
+import uuid from "uuid/v1";
 
 const AddItem = () => {
-	// const { items, addItem } = useContext(ItemsContext);
+	const { addItemToList, items } = useContext(ItemsContext);
+	// let itemName, itemStore, itemPrice;
+	const [state, dispatch] = useReducer(ItemsReducer, initialState);
 
-	const [item, dispatch] = useReducer(ItemsReducer, initialState);
+	const [newItemName, setNewItemName] = useState("");
+	const [newItemStore, setNewItemStore] = useState("");
+	const [newItemPrice, setNewItemPrice] = useState(0);
 
-	const [itemName, setItemName] = useState("");
+	// const [itemName, setItemName] = useState("");
 
-	const [itemStore, setItemStore] = useState("");
+	// const [itemStore, setItemStore] = useState("");
 
-	const [itemPrice, setItemPrice] = useState(0);
+	// const [itemPrice, setItemPrice] = useState();
+
+	console.log(ItemsContext);
+	console.log(items);
+	console.log(addItemToList);
 
 	const handleAddTodo = e => {
 		e.preventDefault();
-		setItemName(itemName);
-		setItemStore(itemStore);
-		setItemPrice(itemPrice);
-		dispatch({
-			type: "ADD_ITEM",
-			payload: {
-				name: itemName,
-				store: itemStore,
-				price: itemPrice
-			}
-		});
+		// setItemName(itemName);
+		// setItemStore(itemStore);
+		// setItemPrice(itemPrice);
+		// dispatch({
+		// 	type: "ADD_ITEM",
+		// 	payload: {
+		// 		name: itemName,
+		// 		store: itemStore,
+		// 		price: itemPrice,
+		// 		id: uuid()
+		// 	}
+		// });
 
-		console.log(e);
+		const payload = {
+			name: newItemName,
+			store: newItemStore,
+			price: newItemPrice,
+			id: uuid()
+		};
+
+		dispatch({ type: "ADD_ITEM", payload });
+		setNewItemName("");
+		setNewItemPrice("");
+		setNewItemStore("");
 	};
 
 	return (
-		<form onSubmit={handleAddTodo}>
-			<input
-				type="text"
-				placeholder="item name"
-				value={itemName}
-				onChange={e => {
-					setItemName(e.target.value);
-				}}
-			/>
-			<input
-				type="text"
-				placeholder="store name"
-				value={itemStore}
-				onChange={e => {
-					setItemStore(e.target.value);
-				}}
-			/>
-			<input
-				type="number"
-				placeholder="item price"
-				value={itemPrice}
-				onChange={e => {
-					setItemPrice(e.target.value);
-				}}
-			/>
-			<input type="submit" value="add item" />
-		</form>
+		<div>
+			<form onSubmit={handleAddTodo}>
+				<input
+					type="text"
+					placeholder="item name"
+					value={newItemName}
+					onChange={e => {
+						setNewItemName(e.target.value);
+					}}
+				/>
+				<input
+					type="text"
+					placeholder="store name"
+					value={newItemStore}
+					onChange={e => {
+						setNewItemStore(e.target.value);
+					}}
+				/>
+				<input
+					type="number"
+					placeholder="item price"
+					value={newItemPrice}
+					onChange={e => {
+						setNewItemPrice(e.target.value);
+					}}
+				/>
+				<input type="submit" value="add item" />
+			</form>
+			{/* <pre>{JSON.stringify(ItemsReducer)}</pre> */}
+		</div>
 	);
 };
 
